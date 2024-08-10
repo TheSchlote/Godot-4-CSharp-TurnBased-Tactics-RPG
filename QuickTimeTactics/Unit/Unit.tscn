@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcwrlpjvwyleu"]
+
+[ext_resource type="PackedScene" uid="uid://fhee0l08r6ld" path="res://Assets/3DGodotRobot/3DGodotRobot.glb" id="1_gy68e"]
+[ext_resource type="Script" path="res://Unit/Unit.cs" id="1_snmfh"]
+[ext_resource type="PackedScene" uid="uid://cicq51ob06g7u" path="res://UI/BattleUI.tscn" id="3_sn7mc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dgflt"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rb7vd"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Unit" type="Area3D"]
+script = ExtResource("1_snmfh")
+
+[node name="3DGodotRobot" parent="." instance=ExtResource("1_gy68e")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_dgflt")
+
+[node name="BattleUI" parent="." instance=ExtResource("3_sn7mc")]
+texture = SubResource("ViewportTexture_rb7vd")

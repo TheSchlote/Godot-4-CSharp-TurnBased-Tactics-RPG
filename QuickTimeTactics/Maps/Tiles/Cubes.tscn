@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1d7ejumwafi"]
+
+[ext_resource type="PackedScene" uid="uid://c6avm4prpwsum" path="res://BattleController/Tiles/Tile.tscn" id="1_a7o6n"]
+[ext_resource type="Material" uid="uid://3p2ivtbpml03" path="res://BattleController/Tiles/Colors/Black.tres" id="2_vffne"]
+[ext_resource type="Material" uid="uid://do3sqrvjjfjfr" path="res://BattleController/Tiles/Colors/Highlight.tres" id="3_3hofw"]
+[ext_resource type="Material" uid="uid://bu58tjscfnkt1" path="res://BattleController/Tiles/Colors/Player.tres" id="4_uo8bq"]
+[ext_resource type="Material" uid="uid://6vecavfku4vd" path="res://BattleController/Tiles/Colors/Enemy.tres" id="5_jjrxs"]
+
+[node name="Cubes" type="Node3D"]
+
+[node name="WalkableTile" parent="." instance=ExtResource("1_a7o6n")]
+
+[node name="WalkableHighlightedTile" parent="." instance=ExtResource("1_a7o6n")]
+surface_material_override/0 = ExtResource("3_3hofw")
+
+[node name="NonWalkableTile" parent="." instance=ExtResource("1_a7o6n")]
+surface_material_override/0 = ExtResource("2_vffne")
+
+[node name="PlayerOccupiedTile" parent="." instance=ExtResource("1_a7o6n")]
+surface_material_override/0 = ExtResource("4_uo8bq")
+
+[node name="EnemyOccupiedTile" parent="." instance=ExtResource("1_a7o6n")]
+surface_material_override/0 = ExtResource("5_jjrxs")

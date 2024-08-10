@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://qabdw2vsftw7"]
+
+[ext_resource type="Script" path="res://Battle/Battle.cs" id="1_k4ars"]
+[ext_resource type="PackedScene" uid="uid://0gfxfe31xv1q" path="res://Camera/Gimbal.tscn" id="2_p4p6a"]
+[ext_resource type="PackedScene" uid="uid://8yhaecjbn0dd" path="res://Maps/ProtoMap.tscn" id="3_yyqy2"]
+[ext_resource type="Script" path="res://Battle/UnitHandler.cs" id="4_4agep"]
+[ext_resource type="PackedScene" uid="uid://dcwrlpjvwyleu" path="res://Unit/Unit.tscn" id="5_ww7ng"]
+[ext_resource type="Resource" uid="uid://b1xtboousa2f8" path="res://Unit/BlueUnit.tres" id="6_l7thw"]
+[ext_resource type="Resource" uid="uid://b7hakd7di5lj0" path="res://Unit/RedUnit.tres" id="7_3ltny"]
+
+[node name="Battle" type="Node3D"]
+script = ExtResource("1_k4ars")
+
+[node name="GridMap" parent="." instance=ExtResource("3_yyqy2")]
+
+[node name="UnitHandler" type="Node3D" parent="."]
+script = ExtResource("4_4agep")
+
+[node name="Unit" parent="UnitHandler" instance=ExtResource("5_ww7ng")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 1, -2.5)
+Stats = ExtResource("6_l7thw")
+
+[node name="Unit2" parent="UnitHandler" instance=ExtResource("5_ww7ng")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 1, -2.5)
+Stats = ExtResource("7_3ltny")
+
+[node name="Gimbal" parent="." instance=ExtResource("2_p4p6a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -12)

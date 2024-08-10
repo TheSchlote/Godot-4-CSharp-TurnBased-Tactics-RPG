@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://b7hakd7di5lj0"]
+
+[ext_resource type="PackedScene" uid="uid://b150jdm42lk43" path="res://Unit/UnitAI.tscn" id="1_wlbub"]
+[ext_resource type="Script" path="res://Unit/UnitStats.cs" id="2_tcwok"]
+
+[resource]
+script = ExtResource("2_tcwok")
+AI = ExtResource("1_wlbub")
+MaxHealth = 25
+CurrentHealth = 25
+Attack = 5
+Movement = 1
+IsPlayerControlledUnit = false
+UnitName = "Red"
+Speed = 70
+MoveSpeed = 1.0

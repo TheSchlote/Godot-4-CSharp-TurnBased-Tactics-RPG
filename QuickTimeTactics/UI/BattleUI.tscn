@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://cicq51ob06g7u"]
+
+[ext_resource type="Script" path="res://UI/BattleUI.cs" id="1_7td8g"]
+[ext_resource type="StyleBox" uid="uid://bjngbvb87x3su" path="res://Themes/HealthBarBG.tres" id="2_h3sqa"]
+[ext_resource type="StyleBox" uid="uid://pk8n8q86nyss" path="res://Themes/HealthBarFill.tres" id="3_kmhde"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_layfl"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_23joa"]
+
+[node name="Sprite3D" type="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_layfl")
+script = ExtResource("1_7td8g")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(192, 32)
+
+[node name="Panel" type="Panel" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_23joa")
+
+[node name="HealthBar" type="ProgressBar" parent="SubViewport/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = ExtResource("2_h3sqa")
+theme_override_styles/fill = ExtResource("3_kmhde")
+step = 1.0
+value = 50.0

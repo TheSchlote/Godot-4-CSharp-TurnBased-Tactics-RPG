@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="UnitStats" load_steps=3 format=3 uid="uid://b1xtboousa2f8"]
+
+[ext_resource type="PackedScene" uid="uid://b150jdm42lk43" path="res://Unit/UnitAI.tscn" id="1_dobxa"]
+[ext_resource type="Script" path="res://Unit/UnitStats.cs" id="1_msjfm"]
+
+[resource]
+script = ExtResource("1_msjfm")
+AI = ExtResource("1_dobxa")
+MaxHealth = 50
+CurrentHealth = 50
+Attack = 10
+Movement = 1
+IsPlayerControlledUnit = true
+UnitName = "Blue"
+Speed = 75
+MoveSpeed = 1.0
