@@ -18,8 +18,10 @@ public partial class Unit : Area3D
         get { return currentAction; }
         set { SetCurrentAction(value); }
     }
+    public AnimationPlayer RobotAnimationPlayer;
     public override void _Ready()
     {
+        RobotAnimationPlayer = GetNode<Node3D>("3DGodotRobot").GetNode<AnimationPlayer>("AnimationPlayer");
         battleUI = GetNode<BattleUI>("BattleUI");
         PlayAnimation("Idle");
     }
@@ -100,29 +102,33 @@ public partial class Unit : Area3D
     public void TakeDamage(int damage)
     {
         if (stats.CurrentHealth <= 0)
+        {
             return;
-
+        }
 
         var tween = CreateTween();
-        tween.TweenCallback(Callable.From(() => stats.TakeDamage(damage)));
-        tween.TweenInterval(0.17f);
-
-        tween.Finished += () =>
+        tween.TweenCallback(Callable.From(() =>
         {
+            stats.TakeDamage(damage);
+            PlayAnimation("Hurt");
+        }));
+        tween.TweenInterval((float)RobotAnimationPlayer.GetAnimation("Hurt").Length);
+        tween.TweenCallback(Callable.From(() =>
+        {
+            PlayAnimation("Idle");
 
             if (stats.CurrentHealth <= 0)
             {
                 QueueFree();
             }
-        };
-    }
-    public void PlayAnimation(string animationName)
-    {
-        var animationPlayer = GetNode<Node3D>("3DGodotRobot").GetNode<AnimationPlayer>("AnimationPlayer");
-        if (animationPlayer.HasAnimation(animationName))
-        {
-            animationPlayer.CurrentAnimation = animationName;
-        }
+        }));
     }
 
+    public void PlayAnimation(string animationName)
+    {
+        if (RobotAnimationPlayer.HasAnimation(animationName))
+        {
+            RobotAnimationPlayer.CurrentAnimation = animationName;
+        }
+    }
 }

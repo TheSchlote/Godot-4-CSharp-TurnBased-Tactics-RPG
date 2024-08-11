@@ -8,7 +8,6 @@ public partial class BasicAttackAction : UnitAction
 
     public float MoveDuration { get; set; } = 1.0f;
     public float AttackDelay { get; set; } = 0.5f;
-    public float ReturnDuration { get; set; } = 1.0f;
 
     public override void PerformAction()
     {
@@ -26,22 +25,20 @@ public partial class BasicAttackAction : UnitAction
         };
         Godot.Collections.Array<Node> targetArray = new Godot.Collections.Array<Node> { TargetUnit };
 
-        tween.TweenProperty(CurrentUnit, "global_position", end, 0.4f);
+        tween.TweenProperty(CurrentUnit, "global_position", end, MoveDuration);
         tween.TweenCallback(Callable.From(() => damageEffect.Execute(targetArray)));
         CurrentUnit.PlayAnimation("Run");
         tween.TweenInterval(AttackDelay);
         CurrentUnit.PlayAnimation("Attack1");
-        TargetUnit.PlayAnimation("Hurt");
         tween.TweenCallback(Callable.From(() => damageEffect.Execute(targetArray)));
         tween.TweenInterval(AttackDelay);
-        tween.TweenProperty(CurrentUnit, "global_position", start, 0.4f);
+        tween.TweenProperty(CurrentUnit, "global_position", start, MoveDuration);
         tween.Finished += () =>
         {
             Events.Instance.EmitSignal(nameof(Events.UnitActionCompleted), CurrentUnit);
         };
         tween.TweenCallback(Callable.From(() => {
             CurrentUnit.PlayAnimation("Idle");
-            TargetUnit.PlayAnimation("Idle");
         }));
     }
 }
