@@ -119,7 +119,7 @@ public partial class Unit : Area3D
 
             if (stats.CurrentHealth <= 0)
             {
-                QueueFree();
+                Events.Instance.EmitSignal("UnitDefeated", stats);
             }
         }));
     }

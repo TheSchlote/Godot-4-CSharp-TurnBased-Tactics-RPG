@@ -14,4 +14,8 @@ public partial class Events : Node
     public delegate void UnitActionCompletedEventHandler();
     [Signal]
     public delegate void UnitTurnEndedEventHandler();
+    [Signal]
+    public delegate void AllUnitsTurnCompletedEventHandler();
+    [Signal]
+    public delegate void UnitDefeatedEventHandler(Stats unitStats);
 }

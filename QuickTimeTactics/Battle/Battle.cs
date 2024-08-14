@@ -17,6 +17,6 @@ public partial class Battle : Node3D
     {
         GetTree().Paused = false;
         _unitHandler.ResetUnitActions();
-        _unitHandler.StartTurn();
+        _unitHandler.StartBattle();
     }
 }

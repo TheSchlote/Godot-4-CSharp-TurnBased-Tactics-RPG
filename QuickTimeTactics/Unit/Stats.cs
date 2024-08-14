@@ -8,7 +8,8 @@ public partial class Stats : Resource
     public delegate void StatsChangedEventHandler();
     [Signal]
     public delegate void HealthChangedEventHandler(int currentHealth, int maxHealth);
-
+    [Signal]
+    public delegate void UnitDefeatedEventHandler();
     [Export]
     public int MaxHealth { get; set; }
 
@@ -75,6 +76,7 @@ public partial class Stats : Resource
         if (CurrentHealth <= 0)
         {
             GD.Print($"{UnitName} has been defeated.");
+            Events.Instance.EmitSignal("UnitDefeated", this);
         }
     }
 
