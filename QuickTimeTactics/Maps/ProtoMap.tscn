@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://8yhaecjbn0dd"]
+[gd_scene load_steps=3 format=3 uid="uid://8yhaecjbn0dd"]
 
 [ext_resource type="MeshLibrary" uid="uid://dho4rwmsm26mg" path="res://Maps/Tiles/Tiles.tres" id="1_aoh3q"]
+[ext_resource type="Script" path="res://Maps/Pathfinding.cs" id="2_qn28u"]
 
-[node name="GridMap" type="GridMap"]
+[node name="GridMap" type="GridMap" groups=["Map"]]
 mesh_library = ExtResource("1_aoh3q")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(0, 65535, 0, 1, 65535, 0, 2, 65535, 0, 3, 65535, 0, 4, 65535, 0, 0, 65534, 0, 0, 65533, 0, 0, 65532, 0, 0, 65531, 0, 1, 65531, 0, 2, 65531, 0, 3, 65531, 0, 4, 65531, 0, 4, 65532, 0, 4, 65533, 0, 4, 65534, 0, 3, 65534, 0, 2, 65534, 0, 1, 65534, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 3, 65532, 0, 2, 65532, 0, 1, 65532, 0)
+"cells": PackedInt32Array(0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 3, 1, 0, 4, 1, 0, 4, 0, 0, 4, 2, 0, 4, 3, 0, 4, 4, 0, 1, 4, 0, 1, 2, 0, 1, 1, 0, 2, 1, 0, 3, 2, 0, 3, 3, 0, 3, 4, 0, 2, 4, 0, 2, 3, 0, 2, 2, 0, 1, 3, 0)
 }
+script = ExtResource("2_qn28u")

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b150jdm42lk43"]
+[gd_scene load_steps=5 format=3 uid="uid://b150jdm42lk43"]
 
 [ext_resource type="Script" path="res://Unit/UnitActionPicker.cs" id="1_tdje2"]
 [ext_resource type="Script" path="res://Actions/BasicAttackAction.cs" id="2_w3bpl"]
+[ext_resource type="Script" path="res://Actions/MoveAction.cs" id="3_7uwn4"]
+[ext_resource type="Script" path="res://Actions/MoveAndAttackAction.cs" id="4_jq8kt"]
 
 [node name="UnitAI" type="Node"]
 script = ExtResource("1_tdje2")
@@ -10,3 +12,9 @@ script = ExtResource("1_tdje2")
 script = ExtResource("2_w3bpl")
 Type = 1
 ChanceWeight = 1.0
+
+[node name="MoveAction" type="Node" parent="."]
+script = ExtResource("3_7uwn4")
+
+[node name="MoveAndAttackAction" type="Node" parent="."]
+script = ExtResource("4_jq8kt")

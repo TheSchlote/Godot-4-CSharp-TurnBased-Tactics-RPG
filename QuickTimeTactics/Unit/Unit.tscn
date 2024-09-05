@@ -9,14 +9,16 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_rb7vd"]
 viewport_path = NodePath("SubViewport")
 
-[node name="Unit" type="Area3D"]
+[node name="Unit" type="Area3D" groups=["Units"]]
 script = ExtResource("1_snmfh")
 
 [node name="3DGodotRobot" parent="." instance=ExtResource("1_gy68e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, 0.5)
 shape = SubResource("CapsuleShape3D_dgflt")
 
 [node name="BattleUI" parent="." instance=ExtResource("3_sn7mc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 0.5)
 texture = SubResource("ViewportTexture_rb7vd")

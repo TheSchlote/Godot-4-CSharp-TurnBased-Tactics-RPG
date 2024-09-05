@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Events : Node
 {
@@ -12,6 +11,8 @@ public partial class Events : Node
 
     [Signal]
     public delegate void UnitActionCompletedEventHandler();
+    [Signal]
+    public delegate void MoveCompletedEventHandler(Unit unit);
     [Signal]
     public delegate void UnitTurnEndedEventHandler();
     [Signal]

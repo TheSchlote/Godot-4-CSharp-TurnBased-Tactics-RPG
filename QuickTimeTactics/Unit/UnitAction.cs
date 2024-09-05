@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class UnitAction : Node
 {
@@ -7,6 +6,16 @@ public partial class UnitAction : Node
     {
         Conditional,
         ChanceBased
+    }
+    public enum ElementType
+    {
+        Nature,
+        Water,
+        Fire,
+        Earth,
+        Energy,
+        Dark,
+        Light
     }
 
     [Export]
