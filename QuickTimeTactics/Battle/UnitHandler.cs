@@ -112,6 +112,7 @@ public partial class UnitHandler : Node3D
             //no more targets, battle over
             return;
         }
+        GD.Print(_units[_currentUnitIndex].Name + " Started Do Turn");
         _units[_currentUnitIndex].DoTurn();
     }
 

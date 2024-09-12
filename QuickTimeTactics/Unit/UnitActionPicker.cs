@@ -43,10 +43,17 @@ public partial class UnitActionPicker : Node
         UnitAction action = GetFirstConditionalAction();
         if (action != null)
         {
+            GD.Print($"{CurrentUnit.Name} chose Conditional action: {action.GetType().Name}");
             return action;
         }
 
-        return GetChanceBasedAction();
+        action = GetChanceBasedAction();
+        if (action != null)
+        {
+            GD.Print($"{CurrentUnit.Name} chose Chance-based action: {action.GetType().Name}");
+        }
+
+        return action;
     }
     public UnitAction GetFirstConditionalAction()
     {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qabdw2vsftw7"]
+[gd_scene load_steps=8 format=3 uid="uid://qabdw2vsftw7"]
 
 [ext_resource type="Script" path="res://Battle/Battle.cs" id="1_k4ars"]
 [ext_resource type="PackedScene" uid="uid://0gfxfe31xv1q" path="res://Camera/Gimbal.tscn" id="2_p4p6a"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dcwrlpjvwyleu" path="res://Unit/Unit.tscn" id="5_ww7ng"]
 [ext_resource type="Resource" uid="uid://b1xtboousa2f8" path="res://Unit/BlueUnit.tres" id="6_l7thw"]
 [ext_resource type="Resource" uid="uid://b7hakd7di5lj0" path="res://Unit/RedUnit.tres" id="7_3ltny"]
-[ext_resource type="PackedScene" uid="uid://c6avm4prpwsum" path="res://Maps/Tiles/Tile.tscn" id="8_xjtjj"]
 
 [node name="Battle" type="Node3D"]
 script = ExtResource("1_k4ars")
@@ -25,6 +24,3 @@ BattleArena = NodePath("../GridMap")
 
 [node name="Gimbal" parent="." instance=ExtResource("2_p4p6a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -12)
-
-[node name="WalkableTile" parent="." instance=ExtResource("8_xjtjj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)

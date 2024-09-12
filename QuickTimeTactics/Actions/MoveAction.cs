@@ -7,10 +7,13 @@ public partial class MoveAction : UnitAction
 
     public override bool IsPerformable()
     {
-        // Check if the unit can move and has a valid path
         if (CurrentUnit == null || TargetUnit == null)
         {
-            return false;
+            TargetUnit = CurrentUnit.FindTarget();
+            if (TargetUnit == null)
+            {
+                return false;
+            }
         }
 
         Pathfinding pathfinding = GetPathfinding();
@@ -20,20 +23,30 @@ public partial class MoveAction : UnitAction
         }
 
         Path = pathfinding.CalculatePath(CurrentUnit.GridPosition, TargetUnit.GridPosition);
-        return Path.Count > 0;
+
+        // We will perform this action if we are not already in range
+        float distance = CurrentUnit.GridPosition.DistanceTo(TargetUnit.GridPosition);
+        bool inRange = distance <= ActionRange;
+
+        GD.Print($"MoveAction: In range: {inRange}, Distance: {distance}, Action Range: {ActionRange}");
+
+        return Path.Count > 0 && !inRange;
     }
 
     public override void PerformAction()
     {
         if (Path != null && Path.Count > 0)
         {
+            GD.Print($"{CurrentUnit.Name} is performing MoveAction");
             CurrentUnit.FollowPath(Path);
+            CurrentUnit.PlayAnimation("Run");
             CurrentUnit.Connect("MoveCompleted", new Callable(this, nameof(OnMoveCompleted)));
         }
     }
 
-    private void OnMoveCompleted()
+    public void OnMoveCompleted()
     {
+        CurrentUnit.PlayAnimation("Idle");
         CurrentUnit.Disconnect("MoveCompleted", new Callable(this, nameof(OnMoveCompleted)));
         Events.Instance.EmitSignal(nameof(Events.UnitActionCompleted), CurrentUnit);
     }

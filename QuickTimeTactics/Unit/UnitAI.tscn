@@ -10,11 +10,12 @@ script = ExtResource("1_tdje2")
 
 [node name="BasicAttackAction" type="Node" parent="."]
 script = ExtResource("2_w3bpl")
-Type = 1
 ChanceWeight = 1.0
 
 [node name="MoveAction" type="Node" parent="."]
 script = ExtResource("3_7uwn4")
+ChanceWeight = 1.0
 
 [node name="MoveAndAttackAction" type="Node" parent="."]
 script = ExtResource("4_jq8kt")
+ChanceWeight = 1.0

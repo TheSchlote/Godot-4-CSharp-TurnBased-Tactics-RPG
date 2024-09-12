@@ -4,6 +4,9 @@ using System.Linq;
 
 public partial class Unit : Area3D
 {
+    [Signal]
+    public delegate void MoveCompletedEventHandler(Unit unit);
+
     private UnitStats stats;
     [Export]
     public UnitStats Stats
@@ -102,47 +105,11 @@ public partial class Unit : Area3D
         {
             return;
         }
-
+        CurrentAction.TargetUnit = FindTarget();
         CurrentAction.PerformAction();
     }
 
-    private bool ShouldMoveAndAttack()
-    {
-        // Logic to determine if the unit should move and attack
-        return true; // Placeholder, replace with your condition
-    }
-
-    private bool ShouldJustMove()
-    {
-        // Logic to determine if the unit should just move
-        return false; // Placeholder, replace with your condition
-    }
-    private Pathfinding GetPathfinding()
-    {
-        var nodes = GetTree().GetNodesInGroup("Map");
-        foreach (Node node in nodes)
-        {
-            if (node is Pathfinding pathfinding)
-            {
-                return pathfinding;
-            }
-        }
-        GD.PrintErr("No Pathfinding node found in the 'Map' group.");
-        return null;
-    }
-
-    private List<Vector3> CalculatePathToTarget()
-    {
-        var pathfinding = GetPathfinding();
-        if (pathfinding == null)
-        {
-            return new List<Vector3>(); // Return an empty path if no pathfinding node is found
-        }
-
-        return pathfinding.CalculatePath(this.GridPosition, FindTarget().GridPosition);
-    }
-
-    private Unit FindTarget()
+    public Unit FindTarget()
     {
         // Get all units that are not on the same team
         List<Unit> potentialTargets = GetTree()
@@ -226,7 +193,6 @@ public partial class Unit : Area3D
             Vector3 nextPos = pathQueue.Peek();
             Vector3 direction = (nextPos - Position).Normalized();
             float step = (float)(MoveSpeed * delta);
-
             if ((Position - nextPos).Length() <= step)
             {
                 nextPos = Position;
@@ -235,8 +201,8 @@ public partial class Unit : Area3D
 
                 if (pathQueue.Count == 0)
                 {
-                    SetProcess(false);  // Stop processing when the path is complete
-                    Events.Instance.EmitSignal("MoveCompleted", this); // Emit global MoveCompleted signal with this unit
+                    SetProcess(false);
+                    Events.Instance.EmitSignal("MoveCompleted", this);
 
                 }
             }

@@ -28,8 +28,8 @@ public partial class Battle : Node3D
         // Example of spawning units with stats
         List<Task> unitTasks = new List<Task>
         {
-            _unitHandler.SpawnUnitAsync(PlayerUnitScene, new Vector3I(1, 0, 1), true, PlayerUnitStats),
-            _unitHandler.SpawnUnitAsync(EnemyUnitScene, new Vector3I(3, 0, 1), false, EnemyUnitStats)
+            _unitHandler.SpawnUnitAsync(PlayerUnitScene, new Vector3I(0, 0, 2), true, PlayerUnitStats),
+            _unitHandler.SpawnUnitAsync(EnemyUnitScene, new Vector3I(4, 0, 2), false, EnemyUnitStats)
         };
 
         // Wait for all units to signal they are ready

@@ -10,10 +10,13 @@ public partial class MoveAndAttackAction : UnitAction
 
     public override bool IsPerformable()
     {
-        // Check if a target exists and if the path to the target is valid
         if (CurrentUnit == null || TargetUnit == null)
         {
-            return false;
+            TargetUnit = CurrentUnit.FindTarget();
+            if (TargetUnit == null)
+            {
+                return false;
+            }
         }
 
         Pathfinding pathfinding = GetPathfinding();
@@ -24,15 +27,22 @@ public partial class MoveAndAttackAction : UnitAction
 
         Path = pathfinding.CalculatePath(CurrentUnit.GridPosition, TargetUnit.GridPosition);
 
-        // Performable if the path exists and has steps
-        return Path.Count > 0;
+        // Performable if out of range but path exists
+        float distance = CurrentUnit.GlobalPosition.DistanceTo(TargetUnit.GlobalPosition);
+        bool inRange = distance <= ActionRange;
+
+        GD.Print($"MoveAndAttackAction: In range: {inRange}, Distance: {distance}, Action Range: {ActionRange}");
+
+        return !inRange && Path.Count > 0;
     }
 
     public override void PerformAction()
     {
         if (Path != null && Path.Count > 0)
         {
+            GD.Print($"{CurrentUnit.Name} is performing MoveAndAttackAction");
             CurrentUnit.FollowPath(Path);
+            CurrentUnit.PlayAnimation("Run");
             CurrentUnit.Connect("MoveCompleted", new Callable(this, nameof(OnMoveCompleted)));
         }
         else
@@ -43,16 +53,16 @@ public partial class MoveAndAttackAction : UnitAction
 
     private void OnMoveCompleted()
     {
+        CurrentUnit.PlayAnimation("Idle");
         CurrentUnit.Disconnect("MoveCompleted", new Callable(this, nameof(OnMoveCompleted)));
         AttackTarget();
     }
 
     private void AttackTarget()
     {
-        Tween tween = CreateTween().SetTrans(Tween.TransitionType.Quint);
+        GD.Print($"{CurrentUnit.Name} is attacking {TargetUnit.Name} after moving");
 
-        Vector3 start = CurrentUnit.GlobalPosition;
-        Vector3 end = TargetUnit.GlobalPosition - (TargetUnit.GlobalPosition - start).Normalized();
+        Tween tween = CreateTween().SetTrans(Tween.TransitionType.Quint);
 
         tween.TweenCallback(Callable.From(() =>
         {
